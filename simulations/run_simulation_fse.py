@@ -145,15 +145,12 @@ flow_manager_mem = flow_manager_slot_size*flow_manager_rows*flow_manager_slots
 # memory computations in bytes
 remaining_memory = mem*1024*1024 - hh_buckets*flow_counter_size                         # [FSE] elephant tracker
 remaining_memory = remaining_memory - (model_memory - NEUTRAL_MODEL_SIZE)               # [pipeline] model
-#remaining_memory = remaining_memory - (et_memory - NEUTRAL_ELEPHANT_TRACKER_SIZE)      # [pipeline] elephant tracker
-#remaining_memory = remaining_memory - math.ceil(bf_m/8)                                # [pipeline] bf
 remaining_memory = remaining_memory - (flow_manager_mem - NEUTRAL_FLOW_MANAGER_SIZE)    # [pipeline] flow manager
 
 if args.type == 'baseline':
     remaining_memory += hh_buckets*flow_counter_size
     remaining_memory += (model_memory - NEUTRAL_MODEL_SIZE)
     remaining_memory += (flow_manager_mem - NEUTRAL_FLOW_MANAGER_SIZE)
-    #remaining_memory += (et_memory - NEUTRAL_ELEPHANT_TRACKER_SIZE)
 
 if 'uni' in args.pcap and args.type != 'baseline':
     remaining_memory += (model_memory - NEUTRAL_MODEL_SIZE)
@@ -167,12 +164,6 @@ if cms_mem < 0:
 
 cms_mem_per_column = cms_bucket_size_first_row + (cms_bucket_size_other_rows * (cms_rows - 1))
 cms_cols = int(math.floor(cms_mem/cms_mem_per_column))
-
-# FIXME empirically it seems better to use multiples of 16, why? (rust built-in hash function performing strangely)
-#if 'caida' in args.pcap:
-#    cms_cols = int(cms_cols - math.fmod(cms_cols, 16))
-#elif 'uni' in args.pcap:
-#    cms_cols = int(cms_cols - math.fmod(cms_cols, 2))
 
 if 'caida' in args.pcap:
     fm_proportions = [1.0, 0.7144182260295988, 0.578189415431055, 0.508657433933787]
