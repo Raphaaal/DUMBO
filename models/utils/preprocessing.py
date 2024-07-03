@@ -446,20 +446,19 @@ if __name__ == "__main__":
         )
     df = pd.concat(df_list)
     
-    # for pk in range(2, 22): 
-
-    #     df = preprocessing_synack_flagcounter(df, pk, args.protocol) 
-    #     df = preprocessing_pshecerst_flagcounter(df, pk, args.protocol) 
-    #     df = preprocessing_min_sequence(df, "pk_size", pk+1)
-    #     df = preprocessing_min_sequence(df, "iat", pk)
-    #     df = preprocessing_max_sequence(df, "pk_size", pk+1)
-    #     df = preprocessing_max_sequence(df, "iat", pk)
-    #     df = preprocessing_sum_sequence(df, "pk_size", pk+1)
-    #     df = preprocessing_sum_sequence(df, "iat", pk)
-    #     df = preprocessing_mean_sequence(df, "pk_size", pk+1)
-    #     df = preprocessing_mean_sequence(df, "iat", pk)
-    #     df = preprocessing_std_sequence(df, "pk_size", pk+1)
-    #     df = preprocessing_std_sequence(df, "iat", pk)
+    for pk in range(2, 22): 
+        df = preprocessing_synack_flagcounter(df, pk, args.protocol) 
+        df = preprocessing_pshecerst_flagcounter(df, pk, args.protocol) 
+        df = preprocessing_min_sequence(df, "pk_size", pk+1)
+        df = preprocessing_min_sequence(df, "iat", pk)
+        df = preprocessing_max_sequence(df, "pk_size", pk+1)
+        df = preprocessing_max_sequence(df, "iat", pk)
+        df = preprocessing_sum_sequence(df, "pk_size", pk+1)
+        df = preprocessing_sum_sequence(df, "iat", pk)
+        df = preprocessing_mean_sequence(df, "pk_size", pk+1)
+        df = preprocessing_mean_sequence(df, "iat", pk)
+        df = preprocessing_std_sequence(df, "pk_size", pk+1)
+        df = preprocessing_std_sequence(df, "iat", pk)
 
     ### Save
     df.to_csv(args.output_file, index=False)
