@@ -248,7 +248,7 @@ impl <K: Hash + PartialEq + Clone> HashTable<K, usize> {
 
     pub fn clear(&mut self) {
         for (i, table) in self.tables.iter_mut().enumerate() {
-            table.iter_mut().foreach(|(_,v)| { v.clear();});
+            table.iter_mut().for_each(|(_,v)| { v.clear();});
         }
     }
 
@@ -347,7 +347,7 @@ impl <K: Hash + PartialEq + Clone> HashTable<K, usize> {
 
     fn reset_unmutable_bit(&mut self) {
         for (_, table) in self.tables.iter_mut().enumerate() {
-            table.iter_mut().foreach(|(_,vector)| {vector.iter_mut().foreach(|(_,_,bit)| {*bit = 0} )});
+            table.iter_mut().for_each(|(_,vector)| {vector.iter_mut().for_each(|(_,_,bit)| {*bit = 0} )});
         }
     }
 

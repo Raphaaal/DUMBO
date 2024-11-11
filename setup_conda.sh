@@ -14,10 +14,8 @@ conda env create -f ./conda_envs/scheduling_env.yml --prefix ./conda_envs/schedu
 
 # Install required packages for system Python (i.e., *not* inside a virtual env)
 # This is required because the Rust simulator makes Python calls and does not play nice with conda
-python -m pip install pandas
-python -m pip install numpy
-python -m pip install onnxruntime
-python -m pip install pickle
-python -m pip install json
-python -m pip install scikit-learn
+python -m pip install pandas==1.5.3
+python -m pip install numpy==1.26.2
+python -m pip install onnxruntime==1.16.3
+python -m pip install scikit-learn==1.3.2
 
